@@ -22,7 +22,7 @@ public class Duke {
             if(input.equals("list")){
                 System.out.println("Here are the tasks in your list:");
                 for(int i = 0; i < listCounter; i++){
-                    System.out.println(Integer.toString(i+1) + ". " + list[i].print());
+                    System.out.println(Integer.toString(i+1) + ". " + list[i].toString());
                 }
             }
 
@@ -31,12 +31,13 @@ public class Duke {
                 int itemNumber = Integer.parseInt(input.substring(input.indexOf(' ') + 1));
                 list[itemNumber - 1].markDone();
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println(list[itemNumber - 1].print());
+                System.out.println(list[itemNumber - 1].toString());
             }
             else{
-                list[listCounter] = new Task(input);
-                System.out.println("added: " + input);
+                list[listCounter] = taskType(input);
+                System.out.println("Got it. I've added this task:" + "\n" + list[listCounter].toString());
                 listCounter++;
+                System.out.println("Now you have " + Integer.toString(listCounter) + " tasks in the list.");
             }
             input = in.nextLine();
         }
@@ -62,5 +63,19 @@ public class Duke {
             return false;
         }
         else return true;
+    }
+
+    public static Task taskType(String s) {
+        String[] splitted = s.split(" ");
+        switch(splitted[0]) {
+            case "todo":
+                return new Todo(s);
+            case "deadline":
+                return new Deadline(s);
+            case "event":
+                return new Event(s);
+            default:
+                return new Task(s);
+        }
     }
 }

@@ -15,8 +15,8 @@ public class Task {
         isDone = true;
     }
 
-    public String print() {
-        return ("[" + this.getStatusIcon() + "]" + description);
+    public String toString() {
+        return ("[" + this.getStatusIcon() + "] " + description);
     }
 
 

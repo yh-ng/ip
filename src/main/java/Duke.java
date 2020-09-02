@@ -15,10 +15,23 @@ public class Duke {
 
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
-        String s = in.nextLine();
-        while(!s.equals("bye")) {
-            System.out.println(s);
-            s = in.nextLine();
+        String input = in.nextLine();
+        String[] list = new String[100];
+        int listCounter = 0;
+        while(!input.equals("bye")) {
+            if(input.equals("list")){
+                for(int i = 0; i < listCounter; i++){
+                    System.out.println(Integer.toString(i+1) + ". " + list[i]);
+                }
+                input = in.nextLine();
+            }
+            else{
+                list[listCounter] = input;
+                System.out.println("added: " + input);
+                input = in.nextLine();
+                listCounter++;
+            }
+
         }
         System.out.println("Bye. Hope to see you again soon!");
 

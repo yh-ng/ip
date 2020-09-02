@@ -19,21 +19,17 @@ public class Duke {
         Task[] list = new Task[100];
         int listCounter = 0;
         while(!input.equals("bye")) {
-            if(input.equals("list")){
+            if(input.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
-                for(int i = 0; i < listCounter; i++){
+                for(int i = 0; i < listCounter; i++) {
                     System.out.println(Integer.toString(i+1) + ". " + list[i].toString());
                 }
-            }
-
-
-            else if(validDoneInput(input,listCounter)){
+            } else if(validDoneInput(input,listCounter)) {
                 int itemNumber = Integer.parseInt(input.substring(input.indexOf(' ') + 1));
                 list[itemNumber - 1].markDone();
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(list[itemNumber - 1].toString());
-            }
-            else{
+            } else {
                 list[listCounter] = taskType(input);
                 System.out.println("Got it. I've added this task:" + "\n" + list[listCounter].toString());
                 listCounter++;
@@ -59,10 +55,9 @@ public class Duke {
             return false;
         }
 
-        if(m>n){
+        if(m>n) {
             return false;
-        }
-        else return true;
+        } else return true;
     }
 
     public static Task taskType(String s) {
@@ -70,12 +65,16 @@ public class Duke {
         switch(splitted[0]) {
             case "todo":
                 return new Todo(s);
+                // Fallthrough
             case "deadline":
                 return new Deadline(s);
+                // Fallthrough
             case "event":
                 return new Event(s);
+                // Fallthrough
             default:
                 return new Task(s);
+                // Fallthrough
         }
     }
 }

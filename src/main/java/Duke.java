@@ -19,7 +19,13 @@ public class Duke {
         Task[] list = new Task[100];
         int listCounter = 0;
         while(!input.equals("bye")) {
-            if(input.equals("list")) {
+            String[] inputArray = input.split(" ");
+            String commandWord = inputArray[0];
+            System.out.println(commandWord);
+            if(!(commandWord.equals("todo") || commandWord.equals("deadline") || commandWord.equals("event") || commandWord.equals("done")
+                    || commandWord.equals("list")) ) {
+                System.out.println("Sorry I don't understand :(");
+            } else if(input.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
                 for(int i = 0; i < listCounter; i++) {
                     System.out.println(Integer.toString(i+1) + ". " + list[i].toString());
@@ -29,6 +35,10 @@ public class Duke {
                 list[itemNumber - 1].markDone();
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(list[itemNumber - 1].toString());
+            } else if(commandWord.equals("done")) {
+                System.out.println("done index out of range");
+            } else if(inputArray.length<2) {
+                System.out.println("item cannot be empty");
             } else {
                 list[listCounter] = taskType(input);
                 System.out.println("Got it. I've added this task:" + "\n" + list[listCounter].toString());

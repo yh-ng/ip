@@ -39,8 +39,8 @@ public class Duke {
             String[] inputArray = input.split(" ");
             String commandWord = inputArray[0];
             System.out.println(commandWord);
-            if(!(commandWord.equals("todo") || commandWord.equals("deadline") || commandWord.equals("event") || commandWord.equals("done")
-                    || commandWord.equals("list") || commandWord.equals("delete"))  ) {
+            if(!( commandWord.equals("todo") || commandWord.equals("deadline") || commandWord.equals("event") || commandWord.equals("done")
+                    || commandWord.equals("list") || commandWord.equals("delete") || commandWord.equals("find")  )  ) {
                 System.out.println("Sorry I don't understand :(");
             } else if(commandWord.equals("delete")) {
                 int deletionIndex = Integer.parseInt(inputArray[1])-1;
@@ -75,6 +75,22 @@ public class Duke {
                 list.get(itemNumber - 1).markDone();
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(list.get(itemNumber - 1).toString());
+            } else if(commandWord.equals("find")) {
+                String searchWord = inputArray[1];
+                int candidateListCount = 0;
+                ArrayList<Task> candidateList = new ArrayList<>();
+
+                for (Task myTask : list) {
+                    if(myTask.getDescription().contains(searchWord)) {
+                        candidateList.add(candidateListCount,myTask);
+                        candidateListCount++;
+                    }
+                }
+                System.out.println("Here are the matching tasks in your list:");
+                for(int i = 0; i < candidateListCount; i++) {
+                    System.out.println(Integer.toString(i+1) + ". " + candidateList.get(i).toString());
+                }
+
             } else if(commandWord.equals("done")) {
                     System.out.println("done index out of range");
             } else if(inputArray.length<2) {

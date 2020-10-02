@@ -9,4 +9,8 @@ public class Event extends Task{
     public String toString() {
         return "[E]" + super.toString() + " (at: " + date + ")";
     }
+
+    public String inputFormat() {
+        return "event " + description + "/at " + date;
+    }
 }

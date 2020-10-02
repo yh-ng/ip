@@ -19,5 +19,9 @@ public class Task {
         return ("[" + this.getStatusIcon() + "] " + description);
     }
 
+    public String formatInput() {
+        return "";
+    }
+
 
 }

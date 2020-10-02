@@ -1,10 +1,14 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Arrays;
 
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -12,13 +16,25 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
+        ArrayList<Task> list = new ArrayList<>();
+        int listCounter = 0;
+
+        String FilePath = "taskList.txt";
+        File file = new File(FilePath);
+        file.createNewFile();
+        Scanner fileScanner = new Scanner(file);
+        while ( fileScanner.hasNextLine() ) {
+            String fileInput = fileScanner.nextLine();
+            list.add(listCounter,taskType(fileInput));
+            listCounter++;
+        }
+
         Scanner in = new Scanner(System.in);
 
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         String input = in.nextLine();
-        ArrayList<Task> list = new ArrayList<>();
-        int listCounter = 0;
+
         while(!input.equals("bye")) {
             String[] inputArray = input.split(" ");
             String commandWord = inputArray[0];
@@ -33,6 +49,21 @@ public class Duke {
                 list.remove(deletionIndex);
                 listCounter--;
                 System.out.println("Now you have " + listCounter + " tasks in the list.");
+
+                /*
+                After deleting item from list, we clear the taskList.txt file.
+                Then we fill up the taskList.txt file again using the new list with deleted task.
+                 */
+                FileWriter clearFile = new FileWriter(FilePath);
+                clearFile.append("");
+                FileWriter taskToFile = new FileWriter(FilePath,true);
+                for (Task taskItem : list) {
+                    taskToFile.append(taskItem.formatInput());
+                    taskToFile.append("\n");
+                    taskToFile.close();
+                }
+
+
 
             } else if(input.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
@@ -53,6 +84,11 @@ public class Duke {
                 System.out.println("Got it. I've added this task:" + "\n" + list.get(listCounter).toString());
                 listCounter++;
                 System.out.println("Now you have " + Integer.toString(listCounter) + " tasks in the list.");
+                FileWriter taskToFile = new FileWriter(FilePath,true);
+                taskToFile.append(input);
+                taskToFile.append("\n");
+                taskToFile.close();
+
             }
             input = in.nextLine();
         }
@@ -97,7 +133,7 @@ public class Duke {
         }
     }
 
-    public static void delete(int n) {
 
-    }
+
+
 }

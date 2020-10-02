@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Arrays;
 
@@ -16,32 +17,40 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         String input = in.nextLine();
-        Task[] list = new Task[100];
+        ArrayList<Task> list = new ArrayList<>();
         int listCounter = 0;
         while(!input.equals("bye")) {
             String[] inputArray = input.split(" ");
             String commandWord = inputArray[0];
             System.out.println(commandWord);
             if(!(commandWord.equals("todo") || commandWord.equals("deadline") || commandWord.equals("event") || commandWord.equals("done")
-                    || commandWord.equals("list")) ) {
+                    || commandWord.equals("list") || commandWord.equals("delete"))  ) {
                 System.out.println("Sorry I don't understand :(");
+            } else if(commandWord.equals("delete")) {
+                int deletionIndex = Integer.parseInt(inputArray[1])-1;
+                System.out.println(" Noted. I've removed this task:");
+                System.out.println(list.get(deletionIndex).toString());
+                list.remove(deletionIndex);
+                listCounter--;
+                System.out.println("Now you have " + listCounter + " tasks in the list.");
+
             } else if(input.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
                 for(int i = 0; i < listCounter; i++) {
-                    System.out.println(Integer.toString(i+1) + ". " + list[i].toString());
+                    System.out.println(Integer.toString(i+1) + ". " + list.get(i).toString());
                 }
             } else if(validDoneInput(input,listCounter)) {
                 int itemNumber = Integer.parseInt(input.substring(input.indexOf(' ') + 1));
-                list[itemNumber - 1].markDone();
+                list.get(itemNumber - 1).markDone();
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println(list[itemNumber - 1].toString());
+                System.out.println(list.get(itemNumber - 1).toString());
             } else if(commandWord.equals("done")) {
-                System.out.println("done index out of range");
+                    System.out.println("done index out of range");
             } else if(inputArray.length<2) {
                 System.out.println("item cannot be empty");
             } else {
-                list[listCounter] = taskType(input);
-                System.out.println("Got it. I've added this task:" + "\n" + list[listCounter].toString());
+                list.add(listCounter, taskType(input));
+                System.out.println("Got it. I've added this task:" + "\n" + list.get(listCounter).toString());
                 listCounter++;
                 System.out.println("Now you have " + Integer.toString(listCounter) + " tasks in the list.");
             }
@@ -86,5 +95,9 @@ public class Duke {
                 return new Task(s);
                 // Fallthrough
         }
+    }
+
+    public static void delete(int n) {
+
     }
 }

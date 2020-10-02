@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Arrays;
 
-
+/*
+The main Duke class
+ */
 public class Duke {
     public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
@@ -19,6 +21,10 @@ public class Duke {
         ArrayList<Task> list = new ArrayList<>();
         int listCounter = 0;
 
+        /*
+        On startup, searches for file "taskList.txt", and writes data into the list.
+        Creates the file if it does not exist.
+         */
         String FilePath = "taskList.txt";
         File file = new File(FilePath);
         file.createNewFile();
@@ -112,6 +118,10 @@ public class Duke {
 
     }
 
+    /*
+    Check if the input string is in the "done ... " format, and if it is a valid format
+     */
+
     public static boolean validDoneInput(String s, int n) {
         if(s.length() < 6){ // check if string is long enough
             return false;
@@ -131,6 +141,9 @@ public class Duke {
         } else return true;
     }
 
+    /*
+    Given the input string, we determine the task type
+     */
     public static Task taskType(String s) {
         String[] splitted = s.split(" ");
         switch(splitted[0]) {

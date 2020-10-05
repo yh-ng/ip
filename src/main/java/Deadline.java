@@ -10,7 +10,9 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + dueDate + ")";
     }
 
-
+    public String formatInput() {
+        return "deadline " + description + "/by " + dueDate;
+    }
 
 
 }

@@ -3,8 +3,32 @@
 This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
 
 ## User Guide
-Command words supported 
+### Command Words Supported
+1. Create task:
+   1. `todo`
+      - Required format: `todo [description]`
+   1. `event`
+      - Required format: `event [description] /at [sometime]`
+   1. `deadline`
+      - Required format: `deadline [description] /by [sometime]`
+1. View list of tasks: `list`
+   - Required format: `list`
+   - Returns a list of tasks
+1. Mark task as done: `done` 
+   - Required format: `done [task number in list]`
+   - Task number must be less than or equal to total number of tasks 
+1. Search for words: `find`
+   - Required format: `find [single non-spaced word]`
+1. `bye`
+   - Terminates program
 
+### Features
+- The list of tasks saves to hard drive, but the data will not reflect if you have marked it as done. (See section **Bugs and Issues**)
+- 
+
+### Bugs and Issues
+- If you mark a task as done, it does not save to hard drive. So if you close and open the app and look at the list, all the tasks will be marked as undone.
+- Most errors are not handled. So if you write symbols like `\` instead of `/`, or do not follow the correct format for `event` or `deadline`, the app will crash.
 
 ## Setting up in Intellij
 

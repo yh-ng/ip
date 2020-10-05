@@ -27,7 +27,6 @@ This is a project template for a greenfield Java project. It's named after the J
 
 ### Features
 - The list of tasks saves to hard drive, but the data will not reflect if you have marked it as done. (See section **Bugs and Issues**)
-- 
 
 ### Bugs and Issues
 - If you mark a task as done, it does not save to hard drive. So if you close and open the app and look at the list, all the tasks will be marked as undone.

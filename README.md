@@ -17,6 +17,9 @@ This is a project template for a greenfield Java project. It's named after the J
 1. Mark task as done: `done` 
    - Required format: `done [task number in list]`
    - Task number must be less than or equal to total number of tasks 
+1. Delete tasks: `delete`
+   - Required format: `delete [task number in list]`
+   - Task number must be less than or equal to total number of tasks 
 1. Search for words: `find`
    - Required format: `find [single non-spaced word]`
 1. `bye`
